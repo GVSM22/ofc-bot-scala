@@ -9,5 +9,5 @@ class MyCommands(requests: Requests, prefix: String) extends CommandController(r
   val commands: Seq[NamedCommand[NotUsed]] = Seq(
     (Seq("oi"), Commands.oi _),
     (Seq("ping"), Commands.ping _)
-  ).map{case (command, func) => newCommand(command).withRequest(func)}
+  ).map{case (command, function) => newCommand(command).withRequest(function)}
 }
