@@ -4,6 +4,10 @@ version := "0.1"
 
 scalaVersion := "2.13.5"
 
+scalacOptions ++= Seq(
+  "-Xfatal-warnings"
+)
+
 resolvers += Resolver.JCenterRepository
 resolvers += "Typesafe repository" at "https://repo.typesafe.com/typesafe/releases/"
 
