@@ -1,4 +1,4 @@
 .bsp/
 .idea/
-src/main/resources/
+src/main/resources/config.json
 target/
