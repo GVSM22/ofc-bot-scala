@@ -1,4 +1,10 @@
 .bsp/
 .idea/
+.ivy2/
+.sbt
 src/main/resources/config.json
+src/main/resources/application.conf
 target/
+postgres-data
+docker-compose.yml
+Dockerfile
