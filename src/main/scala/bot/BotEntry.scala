@@ -1,27 +1,30 @@
 package bot
 
-import ackcord.{APIMessage, ClientSettings}
-import com.typesafe.config.{Config, ConfigFactory}
+import ackcord.APIMessage
+import commands.{CommandsBuilder, CommandsLayer}
+import database.DatabaseLayer
 
-import scala.util.{Failure, Success}
+import scala.util.{Failure, Success, Try}
 
-object BotEntry {
-  private val config: Config = ConfigFactory.load().getConfig("bot")
-  private val token: String = config.getString("token")
-  private val prefix: String = config.getString("prefix")
-
-  private val clientSettings: ClientSettings = ClientSettings(token)
-  import clientSettings.executionContext
+class BotEntry extends ConfigLayer
+  with DatabaseLayer
+  with CommandsLayer {
 
   def run(): Unit = {
     clientSettings.createClient().onComplete {
       case Success(client) => client.onEventSideEffectsIgnore {
-        case APIMessage.Ready(_) => println("ready!")
+        case APIMessage.Ready(_) =>
+          Try {
+            db.createSession().conn
+          } match {
+            case Failure(exception) => println(s"Deu ruim com o banco: $exception")
+            case Success(_) => println(s"ready!")
+          }
       }
-        val myCommands = new Commands(client.requests, prefix)
+        val myCommands = new CommandsBuilder(client.requests, prefix, commands)
         client.commands.bulkRunNamed(myCommands.allCommands: _*)
         client.login()
-      case Failure(exception) => println(exception)
+      case Failure(exception) => println(s"Deu ruim com o Discord: $exception")
     }
   }
 }

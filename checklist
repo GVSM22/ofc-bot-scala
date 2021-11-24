@@ -1,0 +1,7 @@
+- criar --help
+- melhorar uso do comando --insert
+- utilizar migrations
+- utilizar framework de injeção de dependência
+- criar testes unitários
+- criar tabela usuario para representar o user do discord
+- vincular usuario às tabelas de mensagem e de pc (ambos 1 to many)
