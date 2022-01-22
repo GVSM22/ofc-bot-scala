@@ -1,0 +1,16 @@
+{
+    "commands": [
+        {
+            "command_name": "help",
+            "command_description": "mostra todos os comandos disponíveis"
+        },
+        {
+            "command_name": "oi",
+            "command_description": "a mensagem inserida no comando será devolvida pelo bot\nExemplo: --oi olá mundo!"
+        },
+        {
+            "command_name": "pong",
+            "command_description": "um comando simples para testar a resposta do bot"
+        }
+    ]
+}

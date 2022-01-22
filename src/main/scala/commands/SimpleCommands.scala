@@ -1,7 +1,10 @@
 package commands
 
 import ackcord.commands.CommandMessage
+import play.api.libs.json.Json
+import response.DiscordResponse
 
+import java.nio.file.{Files, Path}
 import scala.concurrent.{ExecutionContext, Future}
 
 class SimpleCommands(implicit ec: ExecutionContext) extends CommandList {
@@ -15,10 +18,22 @@ class SimpleCommands(implicit ec: ExecutionContext) extends CommandList {
     Future.successful("pong!")
   }
 
+  private def help(message: CommandMessage[List[String]]): Future[String] = {
+    Future.successful(
+      Json.parse(getClass.getClassLoader.getResourceAsStream("commands-help.json"))
+        .\("commands")
+        .asOpt[List[DiscordResponse]] match {
+          case Some(value) => value.map(_.toString).mkString
+          case None => "hmmm aconteceu algum erro..."
+        }
+    )
+  }
+
   override def commandsWithPrefix: Seq[(String, CommandMessage[List[String]] => Future[String])] = {
     Seq(
       ("oi", oi),
-      ("ping", ping)
+      ("ping", ping),
+      ("help", help)
     )
   }
 }

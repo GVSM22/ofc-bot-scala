@@ -5,7 +5,8 @@ version := "0.1"
 scalaVersion := "2.13.5"
 
 scalacOptions ++= Seq(
-  "-Xfatal-warnings"
+  "-Xfatal-warnings",
+  "-target:jvm-11"
 )
 
 resolvers += Resolver.JCenterRepository
