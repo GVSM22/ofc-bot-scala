@@ -1,10 +1,10 @@
 package database
 
 import database.models.MessageDAO
-import liquibase.{Contexts, Liquibase}
 import liquibase.database.DatabaseFactory
 import liquibase.database.jvm.JdbcConnection
 import liquibase.resource.ClassLoaderResourceAccessor
+import liquibase.{Contexts, Liquibase}
 import slick.jdbc.PostgresProfile.api._
 
 import java.sql.Connection
@@ -16,15 +16,15 @@ trait DatabaseLayer {
 
   private val changeLogFile = "db/changelog/db.changelog-master.yaml"
 
-  private def createLiquibase(dbConnection: Connection, diffFilePath: String): Liquibase = {
+  private def createLiquibase(dbConnection: Connection, changeLogFilePath: String): Liquibase = {
     val database = DatabaseFactory.getInstance.findCorrectDatabaseImplementation(new JdbcConnection(dbConnection))
     val classLoader = classOf[DatabaseLayer].getClassLoader
     val resourceAccessor = new ClassLoaderResourceAccessor(classLoader)
-    new Liquibase(diffFilePath, resourceAccessor, database)
+    new Liquibase(changeLogFilePath, resourceAccessor, database)
   }
 
-  private def updateDb(dbConnection: Connection, diffFilePath: String): Unit = {
-    val liquibase = createLiquibase(dbConnection, diffFilePath)
+  private def updateDb(dbConnection: Connection, changeLogFilePath: String): Unit = {
+    val liquibase = createLiquibase(dbConnection, changeLogFilePath)
     try {
       liquibase.update(null: Contexts)
     } catch {

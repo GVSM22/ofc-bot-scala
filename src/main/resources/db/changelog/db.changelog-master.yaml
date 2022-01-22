@@ -4,22 +4,22 @@ databaseChangeLog:
       author: Giacomo
       changes:
         - createTable:
-            tableName: MESSAGE
+            tableName: message
             columns:
               - column:
-                  name: MSG_ID
+                  name: msg_id
                   type: int
                   autoIncrement: true
                   constraints:
                     nullable: false
                     primaryKey: true
               - column:
-                  name: MSG_MSG
+                  name: msg_msg
                   type: varchar(255)
                   constraints:
                     nullable: false
               - column:
-                  name: MSG_CAT
+                  name: msg_cat
                   type: varchar(255)
                   constraints:
                     nullable: false
