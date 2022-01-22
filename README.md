@@ -6,11 +6,7 @@ Tools required for building:
 - SBT (1.4.7)
 - Docker/Docker Compose
 
-If you want to try it by yourself, you will need an application.conf
-file with a namespace "db" containing parameters to start the database connection
-and a "bot" namespace with a discord bot token
-and a string representing a prefix to the bot's commands.
-
+You'll need a token from discord to start the bot
 
 Running Database
 - docker-compose up (postgres will start at 5432)

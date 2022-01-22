@@ -1,6 +1,6 @@
 - criar --help
 - melhorar uso do comando --insert
-- utilizar migrations
+(done) utilizar migrations
 - utilizar framework de injeção de dependência
 - criar testes unitários
 - criar tabela usuario para representar o user do discord
