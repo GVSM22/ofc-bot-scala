@@ -12,7 +12,7 @@ resolvers += Resolver.JCenterRepository
 resolvers += "Typesafe repository" at "https://repo.typesafe.com/typesafe/releases/"
 
 libraryDependencies += "net.katsstuff" %% "ackcord" % "0.17.1"
-libraryDependencies += "net.katsstuff" %% "ackcord-commands"        % "0.17.1"
+libraryDependencies += "net.katsstuff" %% "ackcord-commands" % "0.17.1"
 libraryDependencies += "com.typesafe.play" %% "play-json" % "2.8.1"
 libraryDependencies ++= Seq(
   "com.typesafe.slick" %% "slick" % "3.3.3",
@@ -25,4 +25,3 @@ libraryDependencies += "com.typesafe" % "config" % "1.4.1"
 libraryDependencies += "org.liquibase" % "liquibase-core" % "4.6.2"
 // https://mvnrepository.com/artifact/org.yaml/snakeyaml
 libraryDependencies += "org.yaml" % "snakeyaml" % "1.29"
-

@@ -1,19 +1,20 @@
 # ofc-bot-scala
-Discord Bot using Scala, Slick and Ackord
+Discord Bot using Scala, Slick and Ackord <br>
+A simple bot for a group of friends, just for learn/practice
 
-Tools required for building:
+### You'll need a token from Discord to start the bot
+
+## Tools required for building:
 - Scala (2.13.5)
-- SBT (1.4.7)
+- SBT (1.5.5)
 - Docker/Docker Compose
 
-You'll need a token from discord to start the bot
-
-Running Database
+## Running Database
 - docker-compose up (postgres will start at 5432)
 
-Building
+## Building
 - sbt clean
 - sbt compile
 
-Running
+## Running
 - sbt run Main
