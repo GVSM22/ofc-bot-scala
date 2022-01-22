@@ -1,0 +1,25 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: Giacomo
+      changes:
+        - createTable:
+            tableName: message
+            columns:
+              - column:
+                  name: msg_id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: msg_msg
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: msg_cat
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
