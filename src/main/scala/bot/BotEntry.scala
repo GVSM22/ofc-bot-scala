@@ -15,7 +15,8 @@ class BotEntry extends ConfigLayer
       case Success(client) => client.onEventSideEffectsIgnore {
         case APIMessage.Ready(_) =>
           Try {
-            db.createSession().conn
+            val connection = db.createSession().conn
+            runMigrations(connection)
           } match {
             case Failure(exception) => println(s"Deu ruim com o banco: $exception")
             case Success(_) => println(s"ready!")

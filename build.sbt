@@ -21,3 +21,6 @@ libraryDependencies ++= Seq(
 )
 libraryDependencies += "org.postgresql" % "postgresql" % "42.2.23"
 libraryDependencies += "com.typesafe" % "config" % "1.4.1"
+// https://mvnrepository.com/artifact/org.liquibase/liquibase-core
+libraryDependencies += "org.liquibase" % "liquibase-core" % "4.6.2"
+
