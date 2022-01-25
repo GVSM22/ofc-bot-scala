@@ -14,7 +14,7 @@ trait DatabaseLayer {
   val db: Database = Database.forConfig("db")
   val messages = TableQuery[MessageDAO]
 
-  private val changeLogFile = "db/changelog/db.changelog-master.yaml"
+  private val changeLogFile = "migrations/db.changelog-master.yaml"
 
   private def createLiquibase(dbConnection: Connection, changeLogFilePath: String): Liquibase = {
     val database = DatabaseFactory.getInstance.findCorrectDatabaseImplementation(new JdbcConnection(dbConnection))
