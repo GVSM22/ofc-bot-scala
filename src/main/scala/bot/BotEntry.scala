@@ -6,9 +6,7 @@ import database.DatabaseLayer
 
 import scala.util.{Failure, Success, Try}
 
-class BotEntry extends ConfigLayer
-  with DatabaseLayer
-  with CommandsLayer {
+class BotEntry extends ConfigLayer with DatabaseLayer with CommandsLayer {
 
   def run(): Unit = {
     clientSettings.createClient().onComplete {

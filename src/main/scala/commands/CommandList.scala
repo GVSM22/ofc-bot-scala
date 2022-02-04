@@ -6,6 +6,13 @@ import scala.concurrent.{ExecutionContext, Future}
 
 abstract class CommandList(implicit ec: ExecutionContext) {
 
-  def commandsWithPrefix: Seq[(String, CommandMessage[List[String]] => Future[String])]
+  import commands.CommandList.SimpleCommandFunction
 
+  def commandsWithPrefix: Seq[(String, SimpleCommandFunction)]
+
+}
+
+object CommandList {
+  type SimpleCommandCall = CommandMessage[List[String]]
+  type SimpleCommandFunction = SimpleCommandCall => Future[String]
 }

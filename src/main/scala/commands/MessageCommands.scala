@@ -1,22 +1,21 @@
 package commands
 
-import ackcord.commands.CommandMessage
+import commands.CommandList.SimpleCommandFunction
 import database.DatabaseLayer
 import slick.jdbc.PostgresProfile.api._
 
 import scala.concurrent.{ExecutionContext, Future}
 
-class MessageCommands(implicit ec: ExecutionContext) extends CommandList
-  with DatabaseLayer {
+class MessageCommands(implicit ec: ExecutionContext) extends CommandList with DatabaseLayer {
 
-  private def insertMessage(message: CommandMessage[List[String]]): Future[String] = {
+  private val insertMessage: SimpleCommandFunction = message => {
     val msg = message.message.content.split(" ").tail
     val messageMap = List("message", "category").zip(msg).toMap
     db.run(DBIO.seq(messages += (1, messageMap("message"), messageMap("category"))))
-      .map(_ =>  "message inserted!")
+      .map(_ => "message inserted!")
   }
 
-  private def getSomeMessages(receivedMessage: CommandMessage[List[String]]): Future[String] = {
+  private val getSomeMessages: SimpleCommandFunction = receivedMessage => {
     type MessageResponse = (Int, String, String)
     val condenseRows: Seq[MessageResponse] => String = messageRows => {
       messageRows.map {
@@ -35,11 +34,11 @@ class MessageCommands(implicit ec: ExecutionContext) extends CommandList
       .recover {
         case exception =>
           println(exception)
-          "An error occurred!"
+          "Algo deu errado enquanto buscava suas mensagens (╥﹏╥)"
       }
   }
 
-  override def commandsWithPrefix: Seq[(String, CommandMessage[List[String]] => Future[String])] = Seq(
+  override def commandsWithPrefix: Seq[(String, SimpleCommandFunction)] = Seq(
     ("insert", insertMessage),
     ("getMessages", getSomeMessages)
   )

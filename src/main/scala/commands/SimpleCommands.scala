@@ -1,6 +1,6 @@
 package commands
 
-import ackcord.commands.CommandMessage
+import commands.CommandList.SimpleCommandFunction
 import play.api.libs.json.Json
 import response.DiscordResponse
 
@@ -8,16 +8,16 @@ import scala.concurrent.{ExecutionContext, Future}
 
 class SimpleCommands(implicit ec: ExecutionContext) extends CommandList {
 
-  private def oi(message: CommandMessage[List[String]]): Future[String] = {
+  private val oi: SimpleCommandFunction = message => {
     val msg = message.message.content.split(" ").tail.mkString(" ")
     Future.successful(s"O ${message.message.authorUsername} disse: $msg")
   }
 
-  private def ping(message: CommandMessage[List[String]]): Future[String] = {
+  private val ping: SimpleCommandFunction = _ => {
     Future.successful("pong!")
   }
 
-  private def help(message: CommandMessage[List[String]]): Future[String] = {
+  private val help: SimpleCommandFunction = _ => {
     Future.successful(
       Json.parse(getClass.getClassLoader.getResourceAsStream("commands-help.json"))
         .\("commands")
@@ -28,7 +28,7 @@ class SimpleCommands(implicit ec: ExecutionContext) extends CommandList {
     )
   }
 
-  override def commandsWithPrefix: Seq[(String, CommandMessage[List[String]] => Future[String])] = {
+  override def commandsWithPrefix: Seq[(String, SimpleCommandFunction)] = {
     Seq(
       ("oi", oi),
       ("ping", ping),
